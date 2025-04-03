@@ -1,5 +1,6 @@
 package com.denprog.praticeapp3inventorysystem;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
@@ -52,9 +53,27 @@ public class MainActivity extends AppCompatActivity {
             MainActivityArgs args = MainActivityArgs.fromBundle(getIntent().getExtras());
             viewModel.fetchUserProfileAndInfoByUserID(args.getUserId(), new SimpleLoadingCallback<UserWithProfile>() {
                 @Override
-                public void onFinished(UserWithProfile data) {
+                public void onFinished(UserWithProfile userWithProfile) {
                     NavHeaderMainBinding header = NavHeaderMainBinding.bind(navigationView.getHeaderView(0));
-                    header.imageView.setImageBitmap(data);
+                    viewModel.loadBitmapFromInternalStorage(userWithProfile.userProfilePath, MainActivity.this, new SimpleLoadingCallback<Bitmap>() {
+                        @Override
+                        public void onFinished(Bitmap data) {
+                            String fullName = userWithProfile.firstName + " " + userWithProfile.lastName;
+                            header.fullnameDisplay.setText(fullName);
+                            header.emailDisplay.setText(userWithProfile.email);
+                            header.imageView.setImageBitmap(data);
+                        }
+
+                        @Override
+                        public void onLoading() {
+
+                        }
+
+                        @Override
+                        public void onError(String message) {
+
+                        }
+                    });
                 }
 
                 @Override

@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,5 +43,10 @@ public class FileUtil {
             strToReturn.append(letters.charAt(randomIndex));
         }
         return strToReturn.toString();
+    }
+
+    public static Bitmap getBitmapFromPath(String path, Context context) throws FileNotFoundException {
+        File savedProfile = new File(context.getFilesDir(), path);
+        return BitmapFactory.decodeStream(new FileInputStream(savedProfile));
     }
 }

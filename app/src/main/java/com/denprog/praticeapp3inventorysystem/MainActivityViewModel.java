@@ -1,5 +1,7 @@
 package com.denprog.praticeapp3inventorysystem;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.View;
 
 import androidx.lifecycle.ViewModel;
@@ -9,7 +11,9 @@ import com.denprog.praticeapp3inventorysystem.room.AppDao;
 import com.denprog.praticeapp3inventorysystem.room.entities.User;
 import com.denprog.praticeapp3inventorysystem.room.views.UserWithProfile;
 import com.denprog.praticeapp3inventorysystem.util.AsyncRunner;
+import com.denprog.praticeapp3inventorysystem.util.FileUtil;
 
+import java.io.File;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -48,6 +52,35 @@ public class MainActivityViewModel extends ViewModel {
 
             @Override
             public void onUI(UserWithProfile data) {
+                simpleLoadingCallback.onFinished(data);
+            }
+
+            @Override
+            public void onError(String message) {
+                simpleLoadingCallback.onError(message);
+            }
+        });
+    }
+
+    public void loadBitmapFromInternalStorage(String path, Context context, SimpleLoadingCallback<Bitmap> simpleLoadingCallback) {
+        AsyncRunner.runAsync(new AsyncRunner.AsyncRunnerCallback<Bitmap>() {
+            @Override
+            public void onPreExecute() {
+
+            }
+
+            @Override
+            public Bitmap onExecute() throws Exception {
+                return FileUtil.getBitmapFromPath(path, context);
+            }
+
+            @Override
+            public void onFinish(Bitmap data) {
+
+            }
+
+            @Override
+            public void onUI(Bitmap data) {
                 simpleLoadingCallback.onFinished(data);
             }
 
