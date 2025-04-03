@@ -54,4 +54,41 @@ public class Validator {
         return null;
     }
 
+    public static String validateItemName(String itemName) {
+        if (isInputNullOrEmpty(itemName)) {
+            return "Empty Field";
+        }
+        return null;
+    }
+
+    public static String validateItemStock(String itemStock) {
+        try {
+            if (isInputNullOrEmpty(itemStock)) {
+                return "Field is empty";
+            }
+            int itemStockInt = Integer.parseInt(itemStock);
+            if (itemStockInt <= 0) {
+                return "Item Stock Cannot Be 0";
+            }
+            return null;
+        } catch (NumberFormatException e) {
+            return "Invalid Format";
+        }
+    }
+
+    public static String validateItemPrice(String itemPrice) {
+        try {
+            if (isInputNullOrEmpty(itemPrice)) {
+                return "Field is empty";
+            }
+            float itemStockInt = Float.parseFloat(itemPrice);
+            if (itemStockInt <= 0) {
+                return "Item Stock Cannot Be 0";
+            }
+            return null;
+        } catch (NumberFormatException e) {
+            return "Invalid Format";
+        }
+    }
+
 }

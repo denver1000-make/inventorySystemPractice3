@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_transform">
+    app:startDestination="@id/inventoryManagement">
 
     <fragment
         android:id="@+id/nav_transform"
@@ -28,4 +28,27 @@
         android:name="com.denprog.praticeapp3inventorysystem.ui.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/inventoryManagement"
+        android:name="com.denprog.praticeapp3inventorysystem.ui.manage_inventories.InventoryManagementFragment"
+        android:label="Manage Inventory"
+        tools:layout="@layout/fragment_inventory_item_list" >
+        <action
+            android:id="@+id/action_inventoryManagement_to_addItemFragment"
+            app:destination="@id/addItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addItemFragment"
+        android:name="com.denprog.praticeapp3inventorysystem.ui.manage_inventories.sub.AddItemFragment"
+        android:label="fragment_add_item"
+        tools:layout="@layout/fragment_add_item" >
+        <argument
+            android:name="itemToUpdate"
+            app:argType="com.denprog.praticeapp3inventorysystem.room.entities.InventoryItem"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="userId"
+            app:argType="long" />
+    </fragment>
 </navigation>

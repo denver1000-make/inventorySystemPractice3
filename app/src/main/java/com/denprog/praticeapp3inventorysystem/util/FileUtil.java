@@ -15,6 +15,8 @@ import java.io.InputStream;
 public class FileUtil {
     public static final String profileImagesPath = "profilePics";
     public static final String userProfileFolderAppend = "_prof";
+    public static final String inventoryImagesPath = "inventoryImages";
+    public static final String inventoryItemImageAppend = "_img";
     public static Bitmap convertUriToBitmap(Uri uri, Context context) throws FileNotFoundException {
         InputStream inputStream = context.getContentResolver().openInputStream(uri);
         return BitmapFactory.decodeStream(inputStream);

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.View;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.denprog.praticeapp3inventorysystem.callback.SimpleLoadingCallback;
@@ -22,8 +23,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 
 @HiltViewModel
 public class MainActivityViewModel extends ViewModel {
+    public MutableLiveData<Long> userId = new MutableLiveData<>(null);
     AppDao appDao;
-
     @Inject
     public MainActivityViewModel(AppDao appDao) {
         this.appDao = appDao;

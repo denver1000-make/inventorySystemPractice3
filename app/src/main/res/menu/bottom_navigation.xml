@@ -4,6 +4,11 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/inventoryManagement"
+            android:icon="@drawable/baseline_view_list_24"
+            android:title="Inventory" />
         <item
             android:id="@+id/nav_transform"
             android:icon="@drawable/ic_camera_black_24dp"

@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = binding.navView;
         if (navigationView != null) {
             MainActivityArgs args = MainActivityArgs.fromBundle(getIntent().getExtras());
+            viewModel.userId.setValue(args.getUserId());
             viewModel.fetchUserProfileAndInfoByUserID(args.getUserId(), new SimpleLoadingCallback<UserWithProfile>() {
                 @Override
                 public void onFinished(UserWithProfile userWithProfile) {
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             mAppBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.nav_transform, R.id.nav_reflow, R.id.nav_slideshow, R.id.nav_settings)
+                    R.id.inventoryManagement, R.id.nav_transform, R.id.nav_reflow, R.id.nav_slideshow, R.id.nav_settings)
                     .setOpenableLayout(binding.drawerLayout)
                     .build();
             NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = binding.appBarMain.contentMain.bottomNavView;
         if (bottomNavigationView != null) {
             mAppBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.nav_transform, R.id.nav_reflow, R.id.nav_slideshow)
+                    R.id.nav_transform, R.id.nav_reflow, R.id.nav_slideshow, R.id.inventoryManagement)
                     .build();
             NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
             NavigationUI.setupWithNavController(bottomNavigationView, navController);
