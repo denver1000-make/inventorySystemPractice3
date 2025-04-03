@@ -17,7 +17,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 
 @HiltViewModel
 public class LoginViewModel extends ViewModel {
-    public MutableLiveData<LoginFormState> loginFormStateMutableLiveData = new MutableLiveData<>(null);
+    public MutableLiveData<LoginFormState> loginFormStateMutableLiveData = new MutableLiveData<>(new LoginFormState(null, null, false));
     private AppDao appDao;
 
     @Inject
