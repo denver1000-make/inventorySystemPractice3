@@ -44,7 +44,7 @@
         tools:layout="@layout/fragment_add_item" >
         <argument
             android:name="itemToUpdate"
-            app:argType="com.denprog.praticeapp3inventorysystem.room.entities.InventoryItem"
+            app:argType="com.denprog.praticeapp3inventorysystem.room.views.InventoryItemWithImage"
             app:nullable="true"
             android:defaultValue="@null" />
         <argument

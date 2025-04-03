@@ -31,7 +31,7 @@ public class AddItemViewModel extends ViewModel {
     public MutableLiveData<Bitmap> itemImageMutableLiveData = new MutableLiveData<>(null);
     public MutableLiveData<AddItemFormState> addItemFormStateMutableLiveData = new MutableLiveData<>(new AddItemFormState(null, null, null, false));
     public MutableLiveData<View.OnClickListener> onClickListenerMutableLiveData = new MutableLiveData<>(null);
-
+    public MutableLiveData<Bitmap> getItemImageMutableLiveData = new MutableLiveData<>();
     AppDao appDao;
 
     @Inject

@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -43,7 +44,7 @@ public class RegisterFragment extends Fragment {
                 public void onFinished(Bitmap data) {
                     binding.pickProfileImage.setImageBitmap(data);
                     viewModel.bitmapMutableLiveData.setValue(data);
-                    progressDialog.hide();
+                    progressDialog.dismiss();
                     binding.registerAction.setEnabled(true);
                 }
 
@@ -57,7 +58,7 @@ public class RegisterFragment extends Fragment {
 
                 @Override
                 public void onError(String message) {
-                    progressDialog.hide();
+                    progressDialog.dismiss();
                     binding.registerAction.setEnabled(true);
                     showErrorMessage(message);
                 }
@@ -133,12 +134,14 @@ public class RegisterFragment extends Fragment {
                             password, new SimpleLoadingCallback<User>() {
                         @Override
                         public void onFinished(User data) {
-                            progressDialog.hide();
+                            progressDialog.dismiss();
                             NavController navController = Navigation.findNavController(requireActivity(), R.id.loginRegFragmentCotainerView);
                             RegisterFragmentDirections.ActionRegisterFragmentToLoginFragment directions =RegisterFragmentDirections.actionRegisterFragmentToLoginFragment();
                             directions.setEmail(data.email);
                             directions.setPassword(data.password);
-                            navController.navigate(directions);
+                            NavOptions navOptions = new NavOptions.Builder().setPopUpTo(navController.getGraph().getStartDestinationId(), true).build();
+                            navController.navigate(directions, navOptions);
+
                         }
 
                         @Override
@@ -151,7 +154,7 @@ public class RegisterFragment extends Fragment {
                         @Override
                         public void onError(String message) {
                             showErrorMessage(message);
-                            progressDialog.hide();
+                            progressDialog.dismiss();
                         }
                     });
                 }
@@ -166,5 +169,17 @@ public class RegisterFragment extends Fragment {
             }
         }
         return false;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        progressDialog = null;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        progressDialog = null;
     }
 }

@@ -29,6 +29,7 @@ import com.denprog.praticeapp3inventorysystem.R;
 import com.denprog.praticeapp3inventorysystem.callback.SimpleLoadingCallback;
 import com.denprog.praticeapp3inventorysystem.databinding.FragmentAddItemBinding;
 import com.denprog.praticeapp3inventorysystem.room.entities.InventoryItem;
+import com.denprog.praticeapp3inventorysystem.room.views.InventoryItemWithImage;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -130,7 +131,8 @@ public class AddItemFragment extends Fragment {
                 };
                 mViewModel.onClickListenerMutableLiveData.setValue(clickListener);
             } else if (addItemFragmentState instanceof AddItemFragmentState.UpdateMode) {
-                InventoryItem inventoryItem = ((AddItemFragmentState.UpdateMode) addItemFragmentState).inventoryItem;
+                InventoryItemWithImage inventoryItem = ((AddItemFragmentState.UpdateMode) addItemFragmentState).inventoryItem;
+
             }
         });
 

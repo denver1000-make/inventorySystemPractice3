@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import com.denprog.praticeapp3inventorysystem.MainActivityArgs;
 import com.denprog.praticeapp3inventorysystem.MainActivityViewModel;
 import com.denprog.praticeapp3inventorysystem.R;
+import com.denprog.praticeapp3inventorysystem.callback.SimpleClickCallback;
 import com.denprog.praticeapp3inventorysystem.databinding.FragmentInventoryItemListBinding;
 import com.denprog.praticeapp3inventorysystem.room.entities.InventoryItem;
 import com.denprog.praticeapp3inventorysystem.room.views.InventoryItemWithImage;
@@ -40,7 +41,16 @@ public class InventoryManagementFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentInventoryItemListBinding.inflate(inflater, container, false);
-        adapter = new InventoryManagementRecyclerViewAdapter();
+        adapter = new InventoryManagementRecyclerViewAdapter(new SimpleClickCallback<InventoryItemWithImage>() {
+            @Override
+            public void doThing(InventoryItemWithImage data) {
+                NavController navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
+                MainActivityArgs args = MainActivityArgs.fromBundle(requireActivity().getIntent().getExtras());
+                InventoryManagementFragmentDirections.ActionInventoryManagementToAddItemFragment directions = InventoryManagementFragmentDirections.actionInventoryManagementToAddItemFragment(args.getUserId());
+                directions.setItemToUpdate(data);
+                navController.navigate(directions);
+            }
+        });
         binding.list.setAdapter(adapter);
         binding.list.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.openAddItemWindow.setOnClickListener(view -> {

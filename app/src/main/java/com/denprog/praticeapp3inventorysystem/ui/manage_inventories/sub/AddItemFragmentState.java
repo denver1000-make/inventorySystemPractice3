@@ -1,6 +1,7 @@
 package com.denprog.praticeapp3inventorysystem.ui.manage_inventories.sub;
 
 import com.denprog.praticeapp3inventorysystem.room.entities.InventoryItem;
+import com.denprog.praticeapp3inventorysystem.room.views.InventoryItemWithImage;
 
 public class AddItemFragmentState {
     public static final class InsertMode extends AddItemFragmentState {
@@ -12,9 +13,9 @@ public class AddItemFragmentState {
     }
 
     public static final class UpdateMode extends AddItemFragmentState {
-        public InventoryItem inventoryItem;
+        public InventoryItemWithImage inventoryItem;
 
-        public UpdateMode(InventoryItem inventoryItem) {
+        public UpdateMode(InventoryItemWithImage inventoryItem) {
             this.inventoryItem = inventoryItem;
         }
     }
